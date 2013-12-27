@@ -14,30 +14,28 @@
 </article>*@
 
 <script type="text/javascript">
-    var loading = true;
     $(function () {
-        getGroupWall();
+        getGroupWall(0, 5);
 
-        //scroll post 
-
-        $(".postHolder").scroll(function () {
-            var curscroll = $(this)[0].scrollTop;
-            var maxscroll = $(this)[0].scrollHeight - $(this).height();
-
-            if ((curscroll >= maxscroll - 400) && loading == false) {
-                loading = true;
-                $(".postHolder").append("<div class='loading'>Loading...</div>");
-                $(this)[0].scrollTop = $(this)[0].scrollHeight - $(this).height();
-                getGroupWal();
-            }
-
-
-        });
     });
+    var loading = true;
+    var start = 5;
+    var end = 10;
+    $(window).scroll(function () {
+        if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+            getGroupWall(start, end);
+            start += 5;
+            end += 5;
+        }
+    });
+
+
+    
 </script>
 
 <article>
-    <div class="publishContainer" style="clear:both">
+
+   <div class="publishContainer" style="clear:both">
         <textarea class="msgTextArea" id="txtMessage" data-bind="value: newMessage, jqAutoresize: {}" style="height: 49px; overflow: hidden; word-wrap: break-word; resize: none;" placeholder="What's on your mind?"></textarea>
         <input type="button" data-url="/Wall/SavePost" value="Share" id="btnShare" data-bind="click: addPost">
     </div>

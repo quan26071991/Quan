@@ -1,13 +1,13 @@
 ﻿
 // ham hien thi post, comment
 
-function getGroupWall() {
+function getGroupWall(start,end) {
     var graphQuery = '/241619362662034/?fields=feed';
     var authToken = "560878127334436|ZXAlCISJfs2YgbsqNkb2sMNbMT4";
     var url = graphQuery + '&access_token=' + authToken;
-
+    
     FB.api(url, 'get', function (response) {
-        for (i = 0, j = response.feed.data.length; i <= j; i++) {
+        for (i = start, j = response.feed.data.length; i < end ; i++) {
             if (response.feed.data[i].message || response.feed.data[i].description) {
                 $(".postHolder").append("<a target='_blank' href='https:///facebook.com/" + response.feed.data[i].from.id + "'> <img data-bind='attr: { src: PostedByAvatar }' src='http:///graph.facebook.com/" + response.feed.data[i].from.id + '/picture' + "'/></a><p><a  target='_blank' href='https:///facebook.com/" + response.feed.data[i].from.id + "' data-bind='text: PostedByName'> " + response.feed.data[i].from.name + " </a>: <span data_bind= 'html: Message' > " + response.feed.data[i].message + " </pan></p>");
 
